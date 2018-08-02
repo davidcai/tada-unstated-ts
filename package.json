@@ -1,0 +1,77 @@
+{
+  "name": "tada-unstated-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=production webpack --config ./tools/webpack.config.js",
+    "dev": "tools/server/start.js",
+    "start": "yarn build && NODE_ENV=production tools/server/start.js",
+    "lint": "tslint 'app/**/*.{ts,tsx}'",
+    "test": "jest"
+  },
+  "author": "David Cai",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "styled-components": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.1.12",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/jest": "^23.3.0",
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-router-dom": "^4.3.0",
+    "@types/webpack-env": "^1.13.6",
+    "babel-core": "^6.26.3",
+    "colors": "^1.3.1",
+    "connect-history-api-fallback": "^1.5.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "express": "^4.16.3",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.4.1",
+    "jest-styled-components": "^5.0.1",
+    "json-server": "^0.14.0",
+    "prettier": "^1.13.7",
+    "shelljs": "^0.8.2",
+    "source-map-loader": "^0.2.3",
+    "ts-jest": "^23.0.1",
+    "ts-loader": "^4.4.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.14.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^2.9.2",
+    "typescript-plugin-styled-components": "^0.0.6",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-hot-middleware": "^2.22.3"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/tools/jest-setup.ts",
+    "testRegex": "src/.*(\\.|/)(test|spec)\\.(jsx?|tsx?)$",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
+}
