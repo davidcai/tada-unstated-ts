@@ -22,5 +22,5 @@ node_modules/
 # Output
 dist/
 
-# Test
-coverage/
+# Test and analysis
+report/
