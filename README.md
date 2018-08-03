@@ -1,6 +1,6 @@
 ## Summary
 
-A project to demonstrate code practice of React, Unstated, and TypeScript.
+Demo code of using React, Unstated, and TypeScript.
 
 ## Install
 

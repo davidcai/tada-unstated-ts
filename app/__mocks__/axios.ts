@@ -1,4 +1,4 @@
 export default {
-  get: jest.fn(() => Promise.resolve({ data: {} })),
-  patch: jest.fn((_, data) => Promise.resolve({ data }))
+  get: jest.fn(),
+  patch: jest.fn()
 };
