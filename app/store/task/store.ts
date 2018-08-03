@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Container } from "unstated";
-import { findIndex } from "lodash-es";
 import { ITask } from "./types";
 
 export interface ITaskStoreState {
@@ -48,7 +47,7 @@ export class TaskStore extends Container<ITaskStoreState>
       .then(res => {
         this.setState(prevState => {
           const tasks = prevState.tasks.slice();
-          const index = findIndex(tasks, { id: task.id });
+          const index = tasks.findIndex(t => t.id === task.id);
           tasks[index] = res.data;
 
           return {
