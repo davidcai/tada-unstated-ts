@@ -1,16 +1,20 @@
-const { resolve } = require("path");
+const { join } = require("path");
+const yargs = require("yargs");
 const webpack = require("webpack");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const createStyledComponentsTransformer = require("typescript-plugin-styled-components")
   .default;
 const { isDevelopment } = require("./utils");
 
+const isBundleAnalyzerEnabled = yargs.argv.analyze;
 const styledComponentsTransformer = createStyledComponentsTransformer();
 
 module.exports = {
   mode: isDevelopment() ? "development" : "production",
 
-  context: resolve(process.cwd(), "app"),
+  context: join(process.cwd(), "app"),
 
   entry: [
     "./index.tsx",
@@ -51,7 +55,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "index.html"
     }),
-    isDevelopment() ? new webpack.HotModuleReplacementPlugin() : null
+    isDevelopment() ? new webpack.HotModuleReplacementPlugin() : null,
+    isBundleAnalyzerEnabled
+      ? new BundleAnalyzerPlugin({
+          analyzerMode: "static",
+          reportFilename: join(process.cwd(), "report", "bundle-analysis.html")
+        })
+      : null
   ].filter(Boolean),
 
   devtool: isDevelopment() ? "cheap-module-eval-source-map" : "source-map",
