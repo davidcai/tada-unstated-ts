@@ -3,6 +3,10 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
+    // To work around the "'Promise' only refers to a type, but is being used as a value here" error,
+    // include "es2015" in the "lib" option. See: https://github.com/ReactiveX/rxjs/issues/2422
+    // and https://www.typescriptlang.org/docs/handbook/compiler-options.html
+    "lib": ["es5", "es2015", "dom", "scripthost"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -17,8 +21,5 @@
     "strict": true,
     "target": "es5"
   },
-  "include": [
-    "./app/**/*",
-    "./types/**/*"
-  ]
+  "include": ["./app/**/*", "./types/**/*"]
 }
