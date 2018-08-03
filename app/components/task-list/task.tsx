@@ -3,7 +3,7 @@ import { ITask } from "../../store/task";
 
 interface IProps {
   task: ITask;
-  onChange: () => any;
+  onChange: React.ChangeEventHandler;
 }
 
 export const Task: React.SFC<IProps> = ({ task, onChange }) => {
