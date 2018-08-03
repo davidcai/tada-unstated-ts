@@ -21,43 +21,39 @@ export class TaskStore extends Container<ITaskStoreState>
     error: undefined
   };
 
-  loadTasks = () => {
+  loadTasks = async () => {
     this.setState({ isLoading: true, tasks: [] });
 
-    return axios
-      .get("http://localhost:3000/tasks")
-      .then(res => {
-        this.setState({
-          tasks: res.data,
-          isLoading: false,
-          error: undefined
-        });
-      })
-      .catch(error => {
-        this.setState({
-          isLoading: false,
-          error
-        });
+    try {
+      const { data } = await axios.get("http://localhost:3000/tasks");
+      this.setState({
+        tasks: data,
+        isLoading: false,
+        error: undefined
       });
+    } catch (error) {
+      this.setState({
+        isLoading: false,
+        error
+      });
+    }
   };
 
-  updateTask = (task: ITask) =>
-    axios
-      .patch(`http://localhost:3000/tasks/${task.id}`, { ...task })
-      .then(res => {
-        this.setState(prevState => {
-          const tasks = prevState.tasks.slice();
-          const index = tasks.findIndex(t => t.id === task.id);
-          tasks[index] = res.data;
+  updateTask = async (task: ITask) => {
+    try {
+      const { data } = await axios.patch(
+        `http://localhost:3000/tasks/${task.id}`,
+        task
+      );
+      this.setState(prevState => {
+        const tasks = prevState.tasks.slice();
+        const index = tasks.findIndex(t => t.id === task.id);
+        tasks[index] = data;
 
-          return {
-            tasks
-          };
-        });
-      })
-      .catch(error => {
-        this.setState({
-          error
-        });
+        return { tasks };
       });
+    } catch (error) {
+      this.setState({ error });
+    }
+  };
 }
