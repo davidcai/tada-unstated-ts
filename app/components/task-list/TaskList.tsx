@@ -10,7 +10,7 @@ import { Task } from "./Task";
 
 interface IProps extends ITaskStoreState, ITaskStoreService {}
 
-export class TaskList extends React.Component<IProps> {
+export class TaskList extends React.PureComponent<IProps> {
   static defaultProps: Partial<IProps> = {
     tasks: [],
     isLoading: false,
