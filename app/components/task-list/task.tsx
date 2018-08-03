@@ -1,12 +1,12 @@
 import * as React from "react";
 import { ITask } from "../../store/task";
 
-interface IProps {
+interface ITaskProps {
   task: ITask;
-  onChange: () => any;
+  onChange: React.ChangeEventHandler;
 }
 
-export const Task: React.SFC<IProps> = ({ task, onChange }) => {
+export const Task: React.SFC<ITaskProps> = ({ task, onChange }) => {
   const id = `task-${task.id}`;
 
   return (

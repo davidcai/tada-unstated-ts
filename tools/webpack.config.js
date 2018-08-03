@@ -52,5 +52,10 @@ module.exports = {
       template: "index.html"
     }),
     isDevelopment() ? new webpack.HotModuleReplacementPlugin() : null
-  ].filter(Boolean)
+  ].filter(Boolean),
+
+  performance: {
+    maxEntrypointSize: 400000, // 400KB
+    maxAssetSize: 400000 // 400KB
+  }
 };
