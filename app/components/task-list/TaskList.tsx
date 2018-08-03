@@ -8,10 +8,10 @@ import {
 } from "../../store/task";
 import { Task } from "./Task";
 
-interface ITaskListProps extends ITaskStoreState, ITaskStoreService {}
+interface IProps extends ITaskStoreState, ITaskStoreService {}
 
-export class TaskList extends React.Component<ITaskListProps> {
-  static defaultProps: Partial<ITaskListProps> = {
+export class TaskList extends React.Component<IProps> {
+  static defaultProps: Partial<IProps> = {
     tasks: [],
     isLoading: false,
     error: undefined

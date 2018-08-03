@@ -54,6 +54,8 @@ module.exports = {
     isDevelopment() ? new webpack.HotModuleReplacementPlugin() : null
   ].filter(Boolean),
 
+  devtool: isDevelopment() ? "cheap-module-eval-source-map" : "source-map",
+
   performance: {
     maxEntrypointSize: 400000, // 400KB
     maxAssetSize: 400000 // 400KB
