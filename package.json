@@ -61,7 +61,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "app/**/*.(jsx?|tsx?)$"
+      "app/**/*.{js,jsx,ts,tsx}"
     ],
     "coverageDirectory": "report/coverage/",
     "coverageReporters": [
