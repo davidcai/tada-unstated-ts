@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { isDevelopment, log } = require("../utils");
+const { isDevelopment, log } = require("@tada/tools");
 const dbServer = require("./db-server");
 const appServer = require("./app-server");
 const { dbPort, appPort } = require("./config");

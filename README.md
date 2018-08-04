@@ -30,7 +30,7 @@ Open browser at `http://localhost:8080`.
 yarn test
 ```
 
-Coverage reports can be found at `<project-root>/report/coverage`.
+Coverage reports can be found at `<project-root>/packages/tada-app/coverage`.
 
 ## Lint
 
@@ -41,7 +41,7 @@ yarn lint
 ## Bundle analysis
 
 ```
-yarn build --analyze
+yarn analyze
 ```
 
-The generated analysis report can be found at `<project-root>report/bundle-analysis.html`
+The generated analysis report can be found at `<project-root>/packages/tada-app/bundle-analysis.html`.

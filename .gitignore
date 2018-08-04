@@ -23,4 +23,5 @@ node_modules/
 dist/
 
 # Test and analysis
-report/
+coverage/
+bundle-analysis.html

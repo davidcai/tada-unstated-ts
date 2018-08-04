@@ -6,7 +6,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const createStyledComponentsTransformer = require("typescript-plugin-styled-components")
   .default;
-const { isDevelopment } = require("./utils");
+const { isDevelopment } = require("@tada/tools");
 
 const isBundleAnalyzerEnabled = yargs.argv.analyze;
 const styledComponentsTransformer = createStyledComponentsTransformer();
@@ -59,7 +59,7 @@ module.exports = {
     isBundleAnalyzerEnabled
       ? new BundleAnalyzerPlugin({
           analyzerMode: "static",
-          reportFilename: join(process.cwd(), "report", "bundle-analysis.html")
+          reportFilename: join(process.cwd(), "bundle-analysis.html")
         })
       : null
   ].filter(Boolean),
