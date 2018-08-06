@@ -20,5 +20,203 @@
       "name": "Pick up Caylene",
       "isDone": false
     }
-  ]
+  ],
+
+  "books": {
+    "1": {
+      "id": "1",
+      "title": "Ball lightning",
+      "category": ["4", "8"],
+      "author": ["1", "17"],
+      "price": 19.71
+    },
+    "2": {
+      "id": "2",
+      "title": "Death's End",
+      "category": ["4", "8"],
+      "author": ["1"],
+      "price": 15.25
+    },
+    "3": {
+      "id": "3",
+      "title": "The Name of the Wind",
+      "category": ["3", "4"],
+      "author": ["2"],
+      "price": 23.62
+    },
+    "4": {
+      "id": "4",
+      "title": "The Wise Man's Fear",
+      "category": ["3", "4"],
+      "author": ["2"],
+      "price": 27.72
+    },
+    "5": {
+      "id": "5",
+      "title": "All We Ever Wanted: A Novel",
+      "category": ["7"],
+      "author": ["3"],
+      "price": 16.71
+    },
+    "6": {
+      "id": "6",
+      "title": "Cottage by the Sea",
+      "category": ["7"],
+      "author": ["4"],
+      "price": 15.46
+    },
+    "7": {
+      "id": "7",
+      "title": "Origin: A Novel",
+      "category": ["4", "6", "9"],
+      "author": ["5"],
+      "price": 19.17
+    },
+    "8": {
+      "id": "8",
+      "title": "The Amazon Code",
+      "category": ["4", "6", "9"],
+      "author": ["6"],
+      "price": 24.00
+    },
+    "9": {
+      "id": "9",
+      "title": "Fahrenheit 451",
+      "category": ["2"],
+      "author": ["7"],
+      "price": 18.40
+    },
+    "10": {
+      "id": "10",
+      "title": "Of Mice and Men",
+      "category": ["2"],
+      "author": ["8"],
+      "price": 20.42
+    },
+    "11": {
+      "id": "11",
+      "title": "Sapiens: A Brief History of Humankind",
+      "category": ["2", "5"],
+      "author": ["9"],
+      "price": 20.76
+    },
+    "12": {
+      "id": "12",
+      "title": "Homo Deus: A Brief History of Tomorrow",
+      "category": ["2", "5"],
+      "author": ["9"],
+      "price": 19.83
+    },
+    "13": {
+      "id": "13",
+      "title": "Life 3.0: Being Human in the Age of Artificial Intelligence",
+      "category": ["2"],
+      "author": ["10"],
+      "price": 19.04
+    },
+    "14": {
+      "id": "14",
+      "title": "The Dot",
+      "category": ["1"],
+      "author": ["11"],
+      "price": 8.99
+    },
+    "15": {
+      "id": "15",
+      "title": "The Legend of Zelda Encyclopedia",
+      "category": ["1", "3"],
+      "author": ["12"],
+      "price": 23.63
+    },
+    "16": {
+      "id": "16",
+      "title": "The Art & Science of Respect: A Memoir by James Prince",
+      "category": ["1", "5"],
+      "author": ["13", "14", "15", "16"],
+      "price": 22.31
+    }
+  },
+
+  "categories": {
+    "1": "arts",
+    "2": "education",
+    "3": "fantasy",
+    "4": "fiction",
+    "5": "history",
+    "6": "mystery",
+    "7": "romance",
+    "8": "scifi",
+    "9": "thriller"
+  },
+
+  "authors": {
+    "1": {
+      "id": "1",
+      "name": "Cixin Liu"
+    },
+    "2": {
+      "id": "2",
+      "name": "Patrick Rothfuss"
+    },
+    "3": {
+      "id": "3",
+      "name": "Emily Giffin"
+    },
+    "4": {
+      "id": "4",
+      "name": "Debbie Macomber"
+    },
+    "5": {
+      "id": "5",
+      "name": "Dan Brown"
+    },
+    "6": {
+      "id": "6",
+      "name": "Nick Thacker"
+    },
+    "7": {
+      "id": "7",
+      "name": "Ray Bradbury"
+    },
+    "8": {
+      "id": "8",
+      "name": "John Steinbeck"
+    },
+    "9": {
+      "id": "9",
+      "name": "Yuval Noah Harari"
+    },
+    "10": {
+      "id": "10",
+      "name": "Max Tegmark"
+    },
+    "11": {
+      "id": "11",
+      "name": "Peter H. Reynolds"
+    },
+    "12": {
+      "id": "12",
+      "name": "Nintendo"
+    },
+    "13": {
+      "id": "13",
+      "name": "James Prince"
+    },
+    "14": {
+      "id": "14",
+      "name": "Jasmine D. Waters"
+    },
+    "15": {
+      "id": "15",
+      "name": "Pilar Sanders"
+    },
+    "16": {
+      "id": "16",
+      "name": "Julia Beverly"
+    },
+    "17": {
+      "id": "17",
+      "name": "Joel Martinsen"
+    }
+  }
 }
