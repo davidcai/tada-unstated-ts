@@ -23,6 +23,13 @@ module.exports = {
     isDevelopment() ? "webpack-hot-middleware/client?reload=true" : null
   ].filter(Boolean),
 
+  output: {
+    path: join(process.cwd(), "dist"),
+    filename: "main.js",
+    publicPath: "/",
+    pathinfo: isDevelopment() // Include info about the modules path, e.g. require(/* ./test */23),
+  },
+
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
   },

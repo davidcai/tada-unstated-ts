@@ -5,20 +5,21 @@ import { IBook } from "./book-types";
 
 export interface IBookStoreState {
   books: Record<string, IBook>;
+  currentBook?: IBook;
   isLoading: boolean;
   error?: Error;
 }
 
 export interface IBookStoreService {
   loadBooks: () => void;
+  findBook: (id: string) => void;
 }
 
 export class BookStore extends Container<IBookStoreState>
   implements IBookStoreService {
-  state = {
+  state: IBookStoreState = {
     books: {},
-    isLoading: false,
-    error: undefined
+    isLoading: false
   };
 
   loadBooks = async () => {
@@ -30,6 +31,23 @@ export class BookStore extends Container<IBookStoreState>
         books: idify<IBook>(data),
         isLoading: false,
         error: undefined
+      });
+    } catch (error) {
+      this.setState({
+        isLoading: false,
+        error
+      });
+    }
+  };
+
+  findBook = async (id: string) => {
+    this.setState({ isLoading: true });
+
+    try {
+      const { data } = await axios.get(`http://localhost:3000/books/${id}`);
+      this.setState({
+        currentBook: data,
+        isLoading: false
       });
     } catch (error) {
       this.setState({

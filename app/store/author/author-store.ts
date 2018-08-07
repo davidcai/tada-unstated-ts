@@ -11,6 +11,7 @@ export interface IAuthorStoreState {
 
 export interface IAuthorStoreService {
   loadAuthors: () => void;
+  // findAuthor: (id: string) => void;
 }
 
 export class AuthorStore extends Container<IAuthorStoreState> {
@@ -37,4 +38,21 @@ export class AuthorStore extends Container<IAuthorStoreState> {
       });
     }
   };
+
+  // findAuthor = async (id: string) => {
+  //   this.setState({ isLoading: true });
+
+  //   try {
+  //     const { data } = await axios.get(`http://localhost:3000/authors/${id}`);
+  //     this.setState({
+  //       currentBook: data,
+  //       isLoading: false
+  //     });
+  //   } catch (error) {
+  //     this.setState({
+  //       isLoading: false,
+  //       error
+  //     });
+  //   }
+  // };
 }

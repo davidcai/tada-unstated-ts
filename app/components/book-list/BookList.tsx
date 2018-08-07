@@ -5,8 +5,11 @@ import {
   IBookStoreState,
   IBookStoreService
 } from "../../store/book";
+import { BookListItem } from "./BookListItem";
 
-interface IProps extends IBookStoreState, IBookStoreService {}
+interface IProps
+  extends IBookStoreState,
+    Pick<IBookStoreService, "loadBooks"> {}
 
 export class BookList extends React.PureComponent<IProps> {
   static defaultProps: Partial<IProps> = {
@@ -27,7 +30,11 @@ export class BookList extends React.PureComponent<IProps> {
     return (
       <ul>
         {books &&
-          Object.keys(books).map(key => <li key={key}>{books[key].title}</li>)}
+          Object.keys(books).map(key => (
+            <li key={key}>
+              <BookListItem {...books[key]} />
+            </li>
+          ))}
       </ul>
     );
   }
