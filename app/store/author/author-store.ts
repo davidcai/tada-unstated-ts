@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Container } from "unstated";
-import { IAuthor } from "./types";
+import { idify } from "../../utils";
+import { IAuthor } from "./author-types";
 
 export interface IAuthorStoreState {
   authors: Record<string, IAuthor>;
@@ -25,7 +26,7 @@ export class AuthorStore extends Container<IAuthorStoreState> {
     try {
       const { data } = await axios.get("http://localhost:3000/authors");
       this.setState({
-        authors: data,
+        authors: idify<IAuthor>(data),
         isLoading: false,
         error: undefined
       });

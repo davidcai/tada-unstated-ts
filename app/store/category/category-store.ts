@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Container } from "unstated";
-import { ICategory } from "./types";
+import { idify } from "../../utils";
+import { ICategory } from "./category-types";
 
 export interface ICategoryStoreState {
   categories: Record<string, ICategory>;
@@ -26,7 +27,7 @@ export class CategoryStore extends Container<ICategoryStoreState>
     try {
       const { data } = await axios.get("http://localhost:3000/categories");
       this.setState({
-        categories: data,
+        categories: idify<ICategory>(data),
         isLoading: false,
         error: undefined
       });

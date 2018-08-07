@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Container } from "unstated";
-import { IBook } from "./types";
+import { idify } from "../../utils";
+import { IBook } from "./book-types";
 
 export interface IBookStoreState {
   books: Record<string, IBook>;
@@ -26,7 +27,7 @@ export class BookStore extends Container<IBookStoreState>
     try {
       const { data } = await axios.get("http://localhost:3000/books");
       this.setState({
-        books: data,
+        books: idify<IBook>(data),
         isLoading: false,
         error: undefined
       });
