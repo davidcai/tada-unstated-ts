@@ -1,10 +1,14 @@
-import axios from "axios";
 import { Container } from "unstated";
+import { AuthorAPI, BookAPI, CategoryAPI } from "../../api";
 import { idify } from "../../utils";
+import { IAuthor } from "../author";
 import { IBook } from "./book-types";
+import { ICategory } from "../category";
 
 export interface IBookStoreState {
-  books: Record<string, IBook>;
+  booksById: Record<string, IBook>;
+  categoriesById: Record<string, ICategory>;
+  authorsById: Record<string, IAuthor>;
   currentBook?: IBook;
   isLoading: boolean;
   error?: Error;
@@ -12,13 +16,15 @@ export interface IBookStoreState {
 
 export interface IBookStoreService {
   loadBooks: () => void;
-  findBook: (id: string) => void;
+  // loadCurrentBook: (id: string) => void;
 }
 
 export class BookStore extends Container<IBookStoreState>
   implements IBookStoreService {
   state: IBookStoreState = {
-    books: {},
+    booksById: {},
+    categoriesById: {},
+    authorsById: {},
     isLoading: false
   };
 
@@ -26,34 +32,59 @@ export class BookStore extends Container<IBookStoreState>
     this.setState({ isLoading: true });
 
     try {
-      const { data } = await axios.get("http://localhost:3000/books");
+      const [books, categories, authors] = await Promise.all([
+        BookAPI.getAll(),
+        CategoryAPI.getAll(),
+        AuthorAPI.getAll()
+      ]);
+
+      const booksById = idify(books);
+      const categoriesById = idify(categories);
+      const authorsById = idify(authors);
+
       this.setState({
-        books: idify<IBook>(data),
+        booksById,
+        categoriesById,
+        authorsById,
         isLoading: false,
         error: undefined
       });
     } catch (error) {
       this.setState({
         isLoading: false,
-        error
+        error: new Error("Cannot load books")
       });
     }
   };
 
-  findBook = async (id: string) => {
-    this.setState({ isLoading: true });
+  // loadCurrentBook = async (id: string) => {
+  //   const book = await BookAPI.getById(id);
+  //   const categories = await Promise.all(
+  //     book.categories.map(categoryId => CategoryAPI.getById(categoryId))
+  //   );
+  //   const authors = await Promise.all(
+  //     book.authors.map(authorId => AuthorAPI.getById(authorId))
+  //   );
 
-    try {
-      const { data } = await axios.get(`http://localhost:3000/books/${id}`);
-      this.setState({
-        currentBook: data,
-        isLoading: false
-      });
-    } catch (error) {
-      this.setState({
-        isLoading: false,
-        error
-      });
-    }
-  };
+  //   console.log(book, categories, authors);
+
+  //   // TODO: load authors and categories
+  // };
+
+  // findBook = async (id: string) => {
+  //   this.setState({ isLoading: true });
+
+  //   try {
+  //     const { data } = await axios.get(`http://localhost:3000/books/${id}`);
+  //     this.setState({
+  //       currentBook: data,
+  //       isLoading: false
+  //     });
+  //   } catch (error) {
+  //     this.setState({
+  //       isLoading: false,
+  //       error
+  //     });
+  //   }
+  // };
 }

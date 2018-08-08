@@ -1,39 +1,38 @@
-import * as React from "react";
-import { RouteComponentProps } from "react-router";
-import { Subscribe } from "unstated";
-import { BookStore, IBook, IBookStoreService } from "../../store/book";
+// import * as React from "react";
+// import { RouteComponentProps } from "react-router";
+// import { Subscribe } from "unstated";
+// import { BookStore, IBook, IBookStoreService } from "../../store/book";
 
-interface IProps extends IBook, Partial<IBookStoreService> {}
+// interface IProps extends IBook, Pick<IBookStoreService, "loadCurrentBook"> {}
 
-export class BookDetails extends React.PureComponent<IProps> {
-  render() {
-    const { title, price } = this.props;
+// export class BookDetails extends React.PureComponent<IProps> {
+//   componentDidMount() {
+//     this.props.loadCurrentBook();
+//   }
 
-    return (
-      <div>
-        {title}: ${price}
-      </div>
-    );
-  }
-}
+//   render() {
+//     const { title, price } = this.props;
 
-// TODO: externalize route props to somewhere
-interface IBookRouteProps {
-  id: string;
-}
+//     return (
+//       <div>
+//         {title}: ${price}
+//       </div>
+//     );
+//   }
+// }
 
-export const BookDetailsContainer: React.SFC<
-  RouteComponentProps<IBookRouteProps>
-> = ({ match }) => (
-  <Subscribe to={[BookStore]}>
-    {(bookStore: BookStore) => {
-      const book = bookStore.state.books[match.params.id];
+// // TODO: externalize route props to somewhere
+// interface IBookRouteProps {
+//   id: string;
+// }
 
-      // authorStore.findAuthor(book.author);
-
-      // TODO: fill in categories and authors
-
-      return <BookDetails {...book} />;
-    }}
-  </Subscribe>
-);
+// export const BookDetailsContainer: React.SFC<
+//   RouteComponentProps<IBookRouteProps>
+// > = ({ match }) => (
+//   <Subscribe to={[BookStore]}>
+//     {(bookStore: BookStore) => {
+//       bookStore.loadCurrentBook(match.params.id);
+//       return <BookDetails id={match.params.id} {...bookStore.state} />;
+//     }}
+//   </Subscribe>
+// );

@@ -1,7 +1,7 @@
 export interface IBook {
   id: string;
   title: string;
-  category: string[];
-  author: string[];
+  categories: string[];
+  authors: string[];
   price: number;
 }

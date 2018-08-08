@@ -4,14 +4,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "unstated";
 import { TaskListContainer } from "./components/task-list";
 import { BookListContainer } from "./components/book-list";
-import { BookDetailsContainer } from "./components/book-details";
+// import { BookDetailsContainer } from "./components/book-details";
 
 const App = () => (
   <Provider>
     <Router>
       <Switch>
         <Route exact={true} path="/" component={TaskListContainer} />
-        <Route path="/books/:id" component={BookDetailsContainer} />
+        {/* <Route path="/books/:id" component={BookDetailsContainer} /> */}
         <Route path="/books" component={BookListContainer} />
       </Switch>
     </Router>

@@ -13,7 +13,9 @@ interface IProps
 
 export class BookList extends React.PureComponent<IProps> {
   static defaultProps: Partial<IProps> = {
-    books: {}
+    booksById: {},
+    categoriesById: {},
+    authorsById: {}
   };
 
   componentDidMount() {
@@ -21,20 +23,41 @@ export class BookList extends React.PureComponent<IProps> {
   }
 
   render() {
-    const { books, isLoading } = this.props;
+    const {
+      booksById,
+      categoriesById,
+      authorsById,
+      isLoading,
+      error
+    } = this.props;
 
     if (isLoading) {
       return <p>Please wait ...</p>;
     }
 
+    if (error) {
+      return <p>{error.message}</p>;
+    }
+
     return (
       <ul>
-        {books &&
-          Object.keys(books).map(key => (
-            <li key={key}>
-              <BookListItem {...books[key]} />
+        {Object.keys(booksById).map(bookId => {
+          const book = booksById[bookId];
+          const categories = book.categories.map(
+            categoryId => categoriesById[categoryId]
+          );
+          const authors = book.authors.map(authorId => authorsById[authorId]);
+
+          return (
+            <li key={bookId}>
+              <BookListItem
+                {...book}
+                categories={categories}
+                authors={authors}
+              />
             </li>
-          ))}
+          );
+        })}
       </ul>
     );
   }
