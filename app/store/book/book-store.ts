@@ -2,14 +2,14 @@ import { Container } from "unstated";
 import { AuthorAPI, BookAPI, CategoryAPI } from "../../api";
 import { idify } from "../../utils";
 import { IAuthor } from "../author";
-import { IBook } from "./book-types";
+import { IBookNormalized } from "./book-types";
 import { ICategory } from "../category";
 
 export interface IBookStoreState {
-  booksById: Record<string, IBook>;
+  booksById: Record<string, IBookNormalized>;
   categoriesById: Record<string, ICategory>;
   authorsById: Record<string, IAuthor>;
-  currentBook?: IBook;
+  currentBook?: IBookNormalized;
   isLoading: boolean;
   error?: Error;
 }
@@ -38,6 +38,7 @@ export class BookStore extends Container<IBookStoreState>
         AuthorAPI.getAll()
       ]);
 
+      // Normalize books, categories, and authors
       const booksById = idify(books);
       const categoriesById = idify(categories);
       const authorsById = idify(authors);
@@ -56,6 +57,8 @@ export class BookStore extends Container<IBookStoreState>
       });
     }
   };
+
+  // loadBook = async (id: string) => {};
 
   // loadCurrentBook = async (id: string) => {
   //   const book = await BookAPI.getById(id);

@@ -1,21 +1,19 @@
 import * as React from "react";
 import { Subscribe } from "unstated";
-import {
-  BookStore,
-  IBookStoreState,
-  IBookStoreService
-} from "../../store/book";
+import { BookStore, IBook } from "../../store/book";
 import { BookListItem } from "./BookListItem";
 
-interface IProps
-  extends IBookStoreState,
-    Pick<IBookStoreService, "loadBooks"> {}
+interface IProps {
+  books: IBook[];
+  isLoading: boolean;
+  error?: Error;
+  loadBooks: () => void;
+}
 
 export class BookList extends React.PureComponent<IProps> {
   static defaultProps: Partial<IProps> = {
-    booksById: {},
-    categoriesById: {},
-    authorsById: {}
+    books: [],
+    isLoading: false
   };
 
   componentDidMount() {
@@ -23,13 +21,7 @@ export class BookList extends React.PureComponent<IProps> {
   }
 
   render() {
-    const {
-      booksById,
-      categoriesById,
-      authorsById,
-      isLoading,
-      error
-    } = this.props;
+    const { books, isLoading, error } = this.props;
 
     if (isLoading) {
       return <p>Please wait ...</p>;
@@ -41,23 +33,11 @@ export class BookList extends React.PureComponent<IProps> {
 
     return (
       <ul>
-        {Object.keys(booksById).map(bookId => {
-          const book = booksById[bookId];
-          const categories = book.categories.map(
-            categoryId => categoriesById[categoryId]
-          );
-          const authors = book.authors.map(authorId => authorsById[authorId]);
-
-          return (
-            <li key={bookId}>
-              <BookListItem
-                {...book}
-                categories={categories}
-                authors={authors}
-              />
-            </li>
-          );
-        })}
+        {books.map(book => (
+          <li key={book.id}>
+            <BookListItem {...book} />
+          </li>
+        ))}
       </ul>
     );
   }
@@ -65,8 +45,35 @@ export class BookList extends React.PureComponent<IProps> {
 
 export const BookListContainer: React.SFC = () => (
   <Subscribe to={[BookStore]}>
-    {(bookStore: BookStore) => (
-      <BookList {...bookStore.state} loadBooks={bookStore.loadBooks} />
-    )}
+    {(bookStore: BookStore) => {
+      const {
+        booksById,
+        categoriesById,
+        authorsById,
+        isLoading,
+        error
+      } = bookStore.state;
+
+      // Denormalize books with categories and authors information
+      const books: IBook[] = Object.keys(booksById).map(bookId => {
+        const bookNormalized = booksById[bookId];
+        return {
+          id: bookNormalized.id,
+          title: bookNormalized.title,
+          price: bookNormalized.price,
+          categories: bookNormalized.categories.map(id => categoriesById[id]),
+          authors: bookNormalized.authors.map(id => authorsById[id])
+        };
+      });
+
+      return (
+        <BookList
+          books={books}
+          isLoading={isLoading}
+          error={error}
+          loadBooks={bookStore.loadBooks}
+        />
+      );
+    }}
   </Subscribe>
 );

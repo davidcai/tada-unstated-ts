@@ -1,4 +1,13 @@
-// import * as React from "react";
+import * as React from "react";
+import { IBook } from "../../store/book";
+
+export const BookDetails: React.SFC<IBook> = ({ title, price }) => (
+  <div>
+    <h2>{title}</h2>
+    <p>{price}</p>
+  </div>
+);
+
 // import { RouteComponentProps } from "react-router";
 // import { Subscribe } from "unstated";
 // import { BookStore, IBook, IBookStoreService } from "../../store/book";
