@@ -6,7 +6,7 @@ const appServer = require("./app-server");
 const { dbPort, appPort } = require("./config");
 
 const mode = isDevelopment() ? "development" : "production";
-log("server", `Running in ${mode.magenta} mode`);
+log("server", `Running in ${mode.yellow} mode`);
 
 dbServer.listen(dbPort, err => {
   if (err) {

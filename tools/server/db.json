@@ -20,5 +20,203 @@
       "name": "Pick up Caylene",
       "isDone": false
     }
+  ],
+
+  "books": [
+    {
+      "id": "1",
+      "title": "Ball lightning",
+      "categories": ["4", "8"],
+      "authors": ["1", "17"],
+      "price": 19.71
+    },
+    {
+      "id": "2",
+      "title": "Death's End",
+      "categories": ["4", "8"],
+      "authors": ["1"],
+      "price": 15.25
+    },
+    {
+      "id": "3",
+      "title": "The Name of the Wind",
+      "categories": ["3", "4"],
+      "authors": ["2"],
+      "price": 23.62
+    },
+    {
+      "id": "4",
+      "title": "The Wise Man's Fear",
+      "categories": ["3", "4"],
+      "authors": ["2"],
+      "price": 27.72
+    },
+    {
+      "id": "5",
+      "title": "All We Ever Wanted: A Novel",
+      "categories": ["7"],
+      "authors": ["3"],
+      "price": 16.71
+    },
+    {
+      "id": "6",
+      "title": "Cottage by the Sea",
+      "categories": ["7"],
+      "authors": ["4"],
+      "price": 15.46
+    },
+    {
+      "id": "7",
+      "title": "Origin: A Novel",
+      "categories": ["4", "6", "9"],
+      "authors": ["5"],
+      "price": 19.17
+    },
+    {
+      "id": "8",
+      "title": "The Amazon Code",
+      "categories": ["4", "6", "9"],
+      "authors": ["6"],
+      "price": 24.00
+    },
+    {
+      "id": "9",
+      "title": "Fahrenheit 451",
+      "categories": ["2"],
+      "authors": ["7"],
+      "price": 18.40
+    },
+    {
+      "id": "10",
+      "title": "Of Mice and Men",
+      "categories": ["2"],
+      "authors": ["8"],
+      "price": 20.42
+    },
+    {
+      "id": "11",
+      "title": "Sapiens: A Brief History of Humankind",
+      "categories": ["2", "5"],
+      "authors": ["9"],
+      "price": 20.76
+    },
+    {
+      "id": "12",
+      "title": "Homo Deus: A Brief History of Tomorrow",
+      "categories": ["2", "5"],
+      "authors": ["9"],
+      "price": 19.83
+    },
+    {
+      "id": "13",
+      "title": "Life 3.0: Being Human in the Age of Artificial Intelligence",
+      "categories": ["2"],
+      "authors": ["10"],
+      "price": 19.04
+    },
+    {
+      "id": "14",
+      "title": "The Dot",
+      "categories": ["1"],
+      "authors": ["11"],
+      "price": 8.99
+    },
+    {
+      "id": "15",
+      "title": "The Legend of Zelda Encyclopedia",
+      "categories": ["1", "3"],
+      "authors": ["12"],
+      "price": 23.63
+    },
+    {
+      "id": "16",
+      "title": "The Art & Science of Respect: A Memoir by James Prince",
+      "categories": ["1", "5"],
+      "authors": ["13", "14", "15", "16"],
+      "price": 22.31
+    }
+  ],
+
+  "categories": [
+    { "id": "1", "name": "arts" },
+    { "id": "2", "name": "education" },
+    { "id": "3", "name": "fantasy" },
+    { "id": "4", "name": "fiction" },
+    { "id": "5", "name": "history" },
+    { "id": "6", "name": "mystery" },
+    { "id": "7", "name": "romance" },
+    { "id": "8", "name": "scifi" },
+    { "id": "9", "name": "thriller" }
+  ],
+
+  "authors": [
+    {
+      "id": "1",
+      "name": "Cixin Liu"
+    },
+    {
+      "id": "2",
+      "name": "Patrick Rothfuss"
+    },
+    {
+      "id": "3",
+      "name": "Emily Giffin"
+    },
+    {
+      "id": "4",
+      "name": "Debbie Macomber"
+    },
+    {
+      "id": "5",
+      "name": "Dan Brown"
+    },
+    {
+      "id": "6",
+      "name": "Nick Thacker"
+    },
+    {
+      "id": "7",
+      "name": "Ray Bradbury"
+    },
+    {
+      "id": "8",
+      "name": "John Steinbeck"
+    },
+    {
+      "id": "9",
+      "name": "Yuval Noah Harari"
+    },
+    {
+      "id": "10",
+      "name": "Max Tegmark"
+    },
+    {
+      "id": "11",
+      "name": "Peter H. Reynolds"
+    },
+    {
+      "id": "12",
+      "name": "Nintendo"
+    },
+    {
+      "id": "13",
+      "name": "James Prince"
+    },
+    {
+      "id": "14",
+      "name": "Jasmine D. Waters"
+    },
+    {
+      "id": "15",
+      "name": "Pilar Sanders"
+    },
+    {
+      "id": "16",
+      "name": "Julia Beverly"
+    },
+    {
+      "id": "17",
+      "name": "Joel Martinsen"
+    }
   ]
 }
