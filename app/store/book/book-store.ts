@@ -1,22 +1,22 @@
 import { Container } from "unstated";
 import { AuthorAPI, BookAPI, CategoryAPI } from "../../api";
-import { idify } from "../../utils";
+import { idify, pick } from "../../utils";
 import { IAuthor } from "../author";
-import { IBookNormalized } from "./book-types";
 import { ICategory } from "../category";
+import { IBookNormalized, IBook } from "./book-types";
 
 export interface IBookStoreState {
   booksById: Record<string, IBookNormalized>;
   categoriesById: Record<string, ICategory>;
   authorsById: Record<string, IAuthor>;
-  currentBook?: IBookNormalized;
+  wipBook?: IBook;
   isLoading: boolean;
   error?: Error;
 }
 
 export interface IBookStoreService {
   loadBooks: () => void;
-  // loadCurrentBook: (id: string) => void;
+  loadWipBook: (id: string) => void;
 }
 
 export class BookStore extends Container<IBookStoreState>
@@ -58,36 +58,31 @@ export class BookStore extends Container<IBookStoreState>
     }
   };
 
-  // loadBook = async (id: string) => {};
+  loadWipBook = async (id: string) => {
+    this.setState({ isLoading: true });
 
-  // loadCurrentBook = async (id: string) => {
-  //   const book = await BookAPI.getById(id);
-  //   const categories = await Promise.all(
-  //     book.categories.map(categoryId => CategoryAPI.getById(categoryId))
-  //   );
-  //   const authors = await Promise.all(
-  //     book.authors.map(authorId => AuthorAPI.getById(authorId))
-  //   );
+    try {
+      const bookNormalized = await BookAPI.getById(id);
+      const book = pick(bookNormalized, ["id", "title", "price"]) as IBook;
+      book.categories = await Promise.all(
+        bookNormalized.categories.map(categoryId =>
+          CategoryAPI.getById(categoryId)
+        )
+      );
+      book.authors = await Promise.all(
+        bookNormalized.authors.map(authorId => AuthorAPI.getById(authorId))
+      );
 
-  //   console.log(book, categories, authors);
-
-  //   // TODO: load authors and categories
-  // };
-
-  // findBook = async (id: string) => {
-  //   this.setState({ isLoading: true });
-
-  //   try {
-  //     const { data } = await axios.get(`http://localhost:3000/books/${id}`);
-  //     this.setState({
-  //       currentBook: data,
-  //       isLoading: false
-  //     });
-  //   } catch (error) {
-  //     this.setState({
-  //       isLoading: false,
-  //       error
-  //     });
-  //   }
-  // };
+      this.setState({
+        wipBook: book,
+        isLoading: false,
+        error: undefined
+      });
+    } catch (error) {
+      this.setState({
+        isLoading: false,
+        error
+      });
+    }
+  };
 }
