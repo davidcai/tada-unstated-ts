@@ -14,13 +14,7 @@ export interface IBookStoreState {
   error?: Error;
 }
 
-export interface IBookStoreService {
-  loadBooks: () => void;
-  loadWipBook: (id: string) => void;
-}
-
-export class BookStore extends Container<IBookStoreState>
-  implements IBookStoreService {
+export class BookStore extends Container<IBookStoreState> {
   state: IBookStoreState = {
     booksById: {},
     categoriesById: {},

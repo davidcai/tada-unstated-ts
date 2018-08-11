@@ -1,33 +1,27 @@
-import axios from "axios";
 import { Container } from "unstated";
 import { idify } from "../../utils";
 import { ICategory } from "./category-types";
+import { CategoryAPI } from "../../api";
 
 export interface ICategoryStoreState {
-  categories: Record<string, ICategory>;
+  categoriesById: Record<string, ICategory>;
   isLoading: boolean;
   error?: Error;
 }
 
-export interface ICategoryStoreService {
-  loadCategories: () => void;
-}
-
-export class CategoryStore extends Container<ICategoryStoreState>
-  implements ICategoryStoreService {
-  state = {
-    categories: {},
-    isLoading: false,
-    error: undefined
+export class CategoryStore extends Container<ICategoryStoreState> {
+  state: ICategoryStoreState = {
+    categoriesById: {},
+    isLoading: false
   };
 
   loadCategories = async () => {
     this.setState({ isLoading: true });
 
     try {
-      const { data } = await axios.get("http://localhost:3000/categories");
+      const categories = await CategoryAPI.getAll();
       this.setState({
-        categories: idify<ICategory>(data),
+        categoriesById: idify<ICategory>(categories),
         isLoading: false,
         error: undefined
       });

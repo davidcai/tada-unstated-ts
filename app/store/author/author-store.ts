@@ -1,33 +1,27 @@
-import axios from "axios";
 import { Container } from "unstated";
 import { idify } from "../../utils";
+import { AuthorAPI } from "../../api";
 import { IAuthor } from "./author-types";
 
 export interface IAuthorStoreState {
-  authors: Record<string, IAuthor>;
+  authorsById: Record<string, IAuthor>;
   isLoading: boolean;
   error?: Error;
 }
 
-export interface IAuthorStoreService {
-  loadAuthors: () => void;
-  // findAuthor: (id: string) => void;
-}
-
 export class AuthorStore extends Container<IAuthorStoreState> {
-  state = {
-    authors: {},
-    isLoading: false,
-    error: undefined
+  state: IAuthorStoreState = {
+    authorsById: {},
+    isLoading: false
   };
 
   loadAuthors = async () => {
     this.setState({ isLoading: true });
 
     try {
-      const { data } = await axios.get("http://localhost:3000/authors");
+      const authors = await AuthorAPI.getAll();
       this.setState({
-        authors: idify<IAuthor>(data),
+        authorsById: idify<IAuthor>(authors),
         isLoading: false,
         error: undefined
       });
@@ -38,21 +32,4 @@ export class AuthorStore extends Container<IAuthorStoreState> {
       });
     }
   };
-
-  // findAuthor = async (id: string) => {
-  //   this.setState({ isLoading: true });
-
-  //   try {
-  //     const { data } = await axios.get(`http://localhost:3000/authors/${id}`);
-  //     this.setState({
-  //       currentBook: data,
-  //       isLoading: false
-  //     });
-  //   } catch (error) {
-  //     this.setState({
-  //       isLoading: false,
-  //       error
-  //     });
-  //   }
-  // };
 }
