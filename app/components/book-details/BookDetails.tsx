@@ -1,5 +1,7 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
+import { Formik } from "formik";
+import * as Yup from "yup";
 import { Subscribe } from "unstated";
 import { IBook, BookStore } from "../../store/book";
 
@@ -12,18 +14,77 @@ interface IProps extends Partial<IBook> {
 
 export class BookDetails extends React.PureComponent<IProps> {
   componentDidMount() {
-    const { id, loadWipBook } = this.props;
-    loadWipBook(id);
+    this.props.loadWipBook(this.props.id);
   }
 
   render() {
-    const { title, price } = this.props;
+    const { title, price, isLoading, error } = this.props;
+
+    if (isLoading) {
+      return <p>Please wait ...</p>;
+    }
+
+    if (error) {
+      return <p>{error.message}</p>;
+    }
 
     return (
-      <div>
-        <h2>{title}</h2>
-        <p>${price}</p>
-      </div>
+      <Formik
+        initialValues={{
+          title,
+          price
+        }}
+        validationSchema={Yup.object().shape({
+          title: Yup.string().required("Please input title"),
+          price: Yup.number()
+            .required("Please input price")
+            .positive("Price must be greater than 0")
+        })}
+        onSubmit={(
+          _,
+          { setSubmitting /*, setErrors setValues and other goodies */ }
+        ) => {
+          setSubmitting(false);
+        }}
+      >
+        {({
+          values,
+          errors,
+          // touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input
+                type="text"
+                name="title"
+                value={values.title}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            {errors.title && <div>{errors.title}</div>}
+            <div>
+              <input
+                type="number"
+                name="price"
+                value={values.price}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            {errors.price && <div>{errors.price}</div>}
+            <div>
+              <button type="submit" disabled={isSubmitting}>
+                Save
+              </button>
+            </div>
+          </form>
+        )}
+      </Formik>
     );
   }
 }
